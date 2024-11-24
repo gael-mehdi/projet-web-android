@@ -1,9 +1,8 @@
 {
 	"info": {
-		"_postman_id": "299c6f84-9949-45d6-9174-4e6c6291d36b",
+		"_postman_id": "192181e0-e853-4f90-94a1-16238c77a6ff",
 		"name": "BookShelf",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "19829403"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
@@ -12,6 +11,7 @@
 				{
 					"listen": "test",
 					"script": {
+						"id": "3605a6d1-2dac-4f42-9690-99448d896cdc",
 						"exec": [
 							""
 						],
@@ -54,6 +54,7 @@
 				{
 					"listen": "test",
 					"script": {
+						"id": "dea1f0b8-8e31-4366-8a2e-e1e0eece7f6f",
 						"exec": [
 							""
 						],
@@ -97,11 +98,12 @@
 			"response": []
 		},
 		{
-			"name": "Get a book by its isbn",
+			"name": "Get a book by its name",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
+						"id": "060fb510-a914-4b26-b297-55500d9fda8e",
 						"exec": [
 							""
 						],
@@ -145,6 +147,7 @@
 				{
 					"listen": "test",
 					"script": {
+						"id": "784af9ce-f54d-48ff-90d6-1cb96e63494d",
 						"exec": [
 							""
 						],
@@ -185,6 +188,7 @@
 				{
 					"listen": "test",
 					"script": {
+						"id": "c63db861-ca0f-4796-a5a5-bd7e161c852e",
 						"exec": [
 							""
 						],
@@ -204,7 +208,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"isbn\": \"978-2081510436\",\n    \"title\": \"Candide\",\n    \"author\": \"Voltaire\",\n    \"date\": \"1759\"\n}"
+					"raw": "{\n    \"title\": \"Candide\",\n    \"author\": \"Voltaire\",\n    \"date\": \"1759\"\n}"
 				},
 				"url": {
 					"raw": "{{url}}/books",
@@ -218,5 +222,6 @@
 			},
 			"response": []
 		}
-	]
+	],
+	"protocolProfileBehavior": {}
 }
