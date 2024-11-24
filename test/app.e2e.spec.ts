@@ -2,7 +2,7 @@ import type { INestApplication } from '@nestjs/common';
 import { Test, type TestingModule } from '@nestjs/testing';
 import * as request from 'supertest';
 import type supertest from 'supertest';
-import { BookModule } from '../src/book.module';
+import { BookModule } from '../src/monument.module';
 
 describe('Books API', () => {
   let app: INestApplication;
