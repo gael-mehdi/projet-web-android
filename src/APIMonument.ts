@@ -9,7 +9,7 @@ export type APIMonument = {
 	autp: string; // Auteur principal
 	leg: string; // Légende ou description
 	datpv: string; // Date de prise de vue ou autre
-	typdoc: string; // Type de document 
+	typdoc: string; // Type de document
 	video_v: string; // URL vers la vidéo ou image principale
 	geoloc: {
 		lon: number; // Longitude
