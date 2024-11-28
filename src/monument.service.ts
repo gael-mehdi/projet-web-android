@@ -14,7 +14,7 @@ export class MonumentService implements OnModuleInit {
 
   async onModuleInit() {
     this.logger.log('Loading monuments from file and API');
-    await Promise.all([this.loadMonumentsFromFile(), this.loadMonumentsFromApi()]);
+    await Promise.all([this.loadMonumentsFromApi()]); //[this.loadMonumentsFromFile(), this.loadMonumentsFromApi()]
     this.logger.log(`${this.storage.size} monuments loaded`);
   }
 
@@ -27,9 +27,9 @@ export class MonumentService implements OnModuleInit {
   private async loadMonumentsFromApi() {
     await firstValueFrom(
       this.httpService
-        .get<APIMonument[]>('https://data.opendatasoft.com/api/explore/v2.1/catalog/datasets/photographies-serie-monuments-historiques-de-1851-a-1914@culture/records?limit=100')
+        .get<{ results: APIMonument[] }>('https://data.opendatasoft.com/api/explore/v2.1/catalog/datasets/photographies-serie-monuments-historiques-de-1851-a-1914@culture/records?limit=100')
         .pipe(
-          map((response) => response.data), // Extraction des données de l'API
+          map((response) => response.data.results), // Extraction des résultats de l'API
           map((apiMonuments) =>
             apiMonuments.map((apiMonument) => ({
               ref: apiMonument.ref,
@@ -66,24 +66,34 @@ export class MonumentService implements OnModuleInit {
   }
 
   getAllMonuments(): Monument[] {
-    return Array.from(this.storage.values()).sort((a, b) =>
-      a.edif.localeCompare(b.edif),
-    );
+    return Array.from(this.storage.values()).sort((a, b) => {
+      const aValue = a.edif || ''; // Utiliser une chaîne vide si a.edif est null
+      const bValue = b.edif || ''; // Utiliser une chaîne vide si b.edif est null
+      return aValue.localeCompare(bValue);
+    });
   }
-
+  
   getMonumentsOf(dep_current_code: string): Monument[] {
     return this.getAllMonuments()
       .filter((monument) => monument.dep_current_code === dep_current_code)
-      .sort((a, b) => a.edif.localeCompare(b.edif));
+      .sort((a, b) => {
+        const aValue = a.edif || ''; // Utiliser une chaîne vide si a.edif est null
+        const bValue = b.edif || ''; // Utiliser une chaîne vide si b.edif est null
+        return aValue.localeCompare(bValue);
+      });
   }
-
+  
   remove(ref: string) {
     this.storage.delete(ref);
   }
-
+  
   search(term: string) {
     return Array.from(this.storage.values())
-      .filter((monument) => monument.edif.includes(term))
-      .sort((a, b) => a.edif.localeCompare(b.edif));
+      .filter((monument) => (monument.edif || '').includes(term)) // Utiliser une chaîne vide si monument.edif est null
+      .sort((a, b) => {
+        const aValue = a.edif || ''; // Utiliser une chaîne vide si a.edif est null
+        const bValue = b.edif || ''; // Utiliser une chaîne vide si b.edif est null
+        return aValue.localeCompare(bValue);
+      });
   }
 }
