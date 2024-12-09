@@ -27,7 +27,7 @@ export class MonumentService implements OnModuleInit {
   private async loadMonumentsFromApi() {
     await firstValueFrom(
       this.httpService
-        .get<{ results: APIMonument[] }>('https://data.opendatasoft.com/api/explore/v2.1/catalog/datasets/photographies-serie-monuments-historiques-de-1851-a-1914@culture/records?limit=100')
+        .get<{ results: APIMonument[] }>('https://data.opendatasoft.com/api/explore/v2.1/catalog/datasets/photographies-serie-monuments-historiques-de-1851-a-1914@culture/records?select=*&where=adresse%20IS%20NOT%20NULL%20and%20edif%20IS%20NOT%20NULL%20and%20autp%20IS%20NOT%20NULL%20and%20leg%20IS%20NOT%20NULL%20&limit=100')
         .pipe(
           map((response) => response.data.results), // Extraction des résultats de l'API
           map((apiMonuments) =>
