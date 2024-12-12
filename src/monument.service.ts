@@ -98,10 +98,10 @@ export class MonumentService implements OnModuleInit {
       });
   }
 
-  updateFavoriteStatus(ref: string, isFavorite: boolean): Monument {
+  updateFavoriteStatus(ref: string): Monument {
     const monument = this.getMonument(ref);
     if (monument) {
-      monument.favorite = isFavorite;
+      monument.favorite = !monument.favorite;
     }
     return monument;
   }

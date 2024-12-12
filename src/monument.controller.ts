@@ -48,7 +48,7 @@ export class MonumentController {
 
   @Put(':ref/favorite')
   favoriteMonument(@Param('ref') ref: string): Monument {
-    return this.monumentService.updateFavoriteStatus(ref, true);
+    return this.monumentService.updateFavoriteStatus(ref);
   }
 
 }
