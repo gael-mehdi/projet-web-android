@@ -24,5 +24,5 @@ export interface Monument {
 	reg_name: string; // Région
 	dep_current_code: string; // Numéro de département
 	dep_name: string; // Département
-	isFavorite: boolean; // Indique si le monument est favori
+	favorite: boolean; // Indique si le monument est favori
 }
