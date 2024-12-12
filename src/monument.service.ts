@@ -42,6 +42,7 @@ export class MonumentService implements OnModuleInit {
               reg_name: apiMonument.reg_name,
               dep_current_code: apiMonument.dep_current_code,
               dep_name: apiMonument.dep_name,
+              isFavorite: false,
             })),
           ), // Transformation du format APIMonument vers Monument
           tap((monuments) =>
@@ -95,5 +96,13 @@ export class MonumentService implements OnModuleInit {
         const bValue = b.edif || ''; // Utiliser une chaîne vide si b.edif est null
         return aValue.localeCompare(bValue);
       });
+  }
+
+  updateFavoriteStatus(ref: string, isFavorite: boolean): Monument {
+    const monument = this.getMonument(ref);
+    if (monument) {
+      monument.isFavorite = isFavorite;
+    }
+    return monument;
   }
 }

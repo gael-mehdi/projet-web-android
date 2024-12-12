@@ -7,6 +7,7 @@ import {
   Param,
   Post,
   Query,
+  Put,
 } from '@nestjs/common';
 import type { Monument } from './Monument';
 import { MonumentService } from './monument.service';
@@ -44,4 +45,10 @@ export class MonumentController {
   searchMonuments(@Body() { term }: { term: string }): Monument[] {
     return this.monumentService.search(term);
   }
+
+  @Put(':ref/favorite')
+  favoriteMonument(@Param('ref') ref: string): Monument {
+    return this.monumentService.updateFavoriteStatus(ref, true);
+  }
+
 }
